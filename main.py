@@ -54,7 +54,7 @@ def alignment_bewertung(seq1, seq2):
                 if value == dict_val:
                     evaluate_list += sorted_dict[index][0]
 
-    return (evaluate_list)
+    return evaluate_list
 
 
 # diese funktion druckt die einzelnen sequenzen wieder aus und fuegt die
@@ -80,3 +80,4 @@ if __name__ == "__main__":
     # ergebnis = alignment_bewertung(seq1,seq2)
     # print(ergebnis)
     # print_alignment(seq1,seq2)
+    print("This is a development branch")
