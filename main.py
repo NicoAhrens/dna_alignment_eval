@@ -30,17 +30,15 @@ def concat_sequnces_in_list(seq1, seq2):
 def alignment_bewertung(seq1, seq2):
     concat_list = []  # kann man vielleicht weglassen
     concat_list = concat_sequnces_in_list(seq1,
-                                          seq2)  # damit die konkatinierte
-    # liste in einer variablen
-    # gespeichert wird und
-    # hier an dieser stelle
-    # einfacher verwendet
-    # werden kann
-    print(concat_list)  ###TEST###
+                                          seq2)
+    # damit die konkatinierte # liste in einer variablen gespeichert wird und
+    # hier an dieser stelle einfacher verwendet werden kann
+
+    #print(concat_list)  ###TEST###
     index = 0
     index2 = 0
     value = None
-    evaluate_list = []
+    evaluate_list = ""
     sorted_dict = sorted(QualitaetsDictionary.items())
     # print(sorted_dict)
 
@@ -54,7 +52,7 @@ def alignment_bewertung(seq1, seq2):
             for dict_val in sorted_dict[index][1]:
                 #
                 if value == dict_val:
-                    evaluate_list.append(sorted_dict[index][0])
+                    evaluate_list += sorted_dict[index][0]
 
     return (evaluate_list)
 
