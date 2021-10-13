@@ -82,3 +82,5 @@ if __name__ == "__main__":
     # print_alignment(seq1,seq2)
     print("This is a development branch")
     print("This is an UPDATE")
+
+    x = 3
