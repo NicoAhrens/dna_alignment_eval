@@ -80,7 +80,4 @@ if __name__ == "__main__":
     # ergebnis = alignment_bewertung(seq1,seq2)
     # print(ergebnis)
     # print_alignment(seq1,seq2)
-    print("This is a development branch")
-    print("This is an UPDATE")
 
-    x = 30
