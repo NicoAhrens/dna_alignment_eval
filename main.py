@@ -1,6 +1,5 @@
 # liste wird fuer die bewertung der eingabe verwendet
-QualitaetsListe = ["A", "G", "C", "T", "_", " ", "AG", "GA", "CA", "AC",
-                   "CG", "GC", "TA", "AT", "TG", "GT"]
+QualitaetsListe = ["A", "G", "C", "T", "_", " "]
 # erstellung eines dictionary zur beurteilung der jeweiligen alignments bzw.
 # ihrer konkatinierten strings der sequenzen an der postion [index]. Die
 # jeweiligen Keys sind die letztendliche bewertung. die values sind listen
@@ -35,10 +34,14 @@ def concat_sequnces_in_string(seq1, seq2):
         index = 0
         concat_pair = ""
         while index < len(string_seq1) and index < len(string_seq2):
-            for i in string_seq1:
-                concat_pair = string_seq1[index] + string_seq2[index]
-                concat_list.append(concat_pair)
-                index += 1
+                for i in string_seq1:
+                    if string_seq1[index] in QualitaetsListe and string_seq2[index] in QualitaetsListe:
+                        concat_pair = string_seq1[index] + string_seq2[index]
+                        concat_list.append(concat_pair)
+                        index += 1
+                    else:
+                        print("Wrong input.") # TODO: try except block
+                        break
         # print(concat_list) ####TEST####
         return concat_list
 
@@ -98,5 +101,6 @@ if __name__ == "__main__":
     seq1 = "ATCG"
     seq2 = "AGSG"
     print_alignment(seq1, seq2)
-
-
+    seq1 = "ATT"
+    seq2 = "ATG"
+    print_alignment(seq1, seq2)
