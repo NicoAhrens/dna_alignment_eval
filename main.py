@@ -1,12 +1,12 @@
 # liste wird fuer die bewertung der eingabe verwendet
-QualitaetsListe = ["A", "G", "C", "T", "_", " "]
+QualityList = ["A", "G", "C", "T", "_", " "]
 # erstellung eines dictionary zur beurteilung der jeweiligen alignments bzw.
 # ihrer konkatinierten strings der sequenzen an der postion [index]. Die
 # jeweiligen Keys sind die letztendliche bewertung. die values sind listen
 # an dessen einzelnen index positionen, die zugehoerigen Alignments bzw.
 # mutationen sind. Es wird ein dictionary verwendet, damit das programm
 # erweiterbar ist
-QualitaetsDictionary = \
+QualityDictionary = \
     {
         "|": ["AA", "GG", "CC", "TT"],
         ":": ["CT", "TC", "AG", "GA"],
@@ -28,30 +28,23 @@ def concat_sequnces_in_string(seq1, seq2):
     string_seq1 = seq1
     string_seq2 = seq2
 
-    ################## hier noch try except blöcke einarbeiten #############
     if len(string_seq1) != len(string_seq2):
-        print("Strings sind nicht gleich lang.")
+        print("Sequences don't have the same length. Sequence is skipped.")
     else:
         concat_list = []
         index = 0
         concat_pair = ""
         while index < len(string_seq1) and index < len(string_seq2):
                 for _ in string_seq1:
-                    if string_seq1[index] in QualitaetsListe and string_seq2[index] in QualitaetsListe:
-                        concat_pair = string_seq1[index] + string_seq2[index]
-                        concat_list.append(concat_pair)
-                        index += 1
-                    else:
-                        print("Wrong input. Sequence pair is removed")
-                        # TODO: try except block
-                        index += 1
-                        continue
+                    concat_pair = string_seq1[index] + string_seq2[index]
+                    concat_list.append(concat_pair)
+                    index += 1
         # print(concat_list) ####TEST####
         return concat_list
 
 # diese funktion vergleicht die eingespeicherten werte in der liste der
 # sequenzen aus concat_sequences_in_list() mit den werten aus dem
-# QualitaetsDictionary und gibt deren zugehoerigen key in einen string zurueck
+# QualityDictionary und gibt deren zugehoerigen key in einen string zurueck
 # INPUT: str1(), str2()
 # OUTPUT: str
 def alignment_eval(seq1, seq2):
@@ -59,30 +52,49 @@ def alignment_eval(seq1, seq2):
 
     # damit die konkatinierte liste in einer variablen gespeichert wird und
     # hier an dieser stelle einfacher verwendet werden kann
-    concat_list = concat_sequnces_in_string(seq1,
-                                          seq2)
+    concat_list = concat_sequnces_in_string(seq1, seq2)
     index = 0
-    value = None
     evaluate_string = ""
-    # erzeugt ein tuple aller items in Qualitaetsdictionary
-    sorted_dict = sorted(QualitaetsDictionary.items())
-    print(sorted_dict)
+    # creates tuple of all items in QualityDictionary, to iterate over the
+    # dictionary.
+    sorted_dict = sorted(QualityDictionary.items(), reverse = True)
+    #print(sorted_dict)
+    wrong_inputs = []
+    mergedDictionaryValues = \
+        [
+         "AA", "GG", "CC", "TT", "CT", "TC", "AG", "GA","CA", "AC", "CG", "GC",
+         "TA", "AT", "TG", "GT", "A_", "_A", "G_", "_G", "C_", "_C", "T_",
+         "_T", "__"
+         ]
+    for seq1_seq2_pair in concat_list:
+        # print('Pair: ', seq1_seq2_pair)
+        # this if-query creates a list of wrong inputs, when
+        # the seq1_seq2_pair is not in the mergedDictionaryValues and
+        # puts a # on this position to track the wrong input
 
-    for value in concat_list:
-        # value speichert den jeweiligen concatinierten
-        # string der seq1 und seq2, um diesen mit
-        # der QulitaetsDictionary vergleichen zu koennen
+        if seq1_seq2_pair not in mergedDictionaryValues:
+            # print('Pair: ', seq1_seq2_pair)
+            # print('QualityValue: ', mergedDictionaryValues)
+            evaluate_string += "#"
+            wrong_inputs.append('Wrong input. Character combination {} in # '\
+                    'position not allowed'.format(seq1_seq2_pair))
+        else:
+            # seq1_seq2_pair is the variable to iterate over in the loop.
+            # it uses each concatenatet pair from the concat_list to
+            # value speichert den jeweiligen concatinierten
+            # string der seq1 und seq2, um diesen mit
+            # der QulitaetsDictionary vergleichen zu koennen
             for index in range(0, len(sorted_dict), 1):
-                # for-schleife iteriert ueber die gesamte laenge des sortierten
-                # dictionaries
+            # for-schleife iteriert ueber die gesamte laenge des sortierten
+            # dictionaries
+                #print(sorted_dict[index][1])
+
                 for dict_val in sorted_dict[index][1]:
-                    if value == dict_val:
+                    if seq1_seq2_pair == dict_val:
                         evaluate_string += sorted_dict[index][0]
-                    elif value not in sorted_dict:
-                        evaluate_string += "#"
+    for index in wrong_inputs:
+        print([index])
     return evaluate_string
-
-
 # diese funktion druckt die einzelnen sequenzen wieder aus und fuegt die
 # bewertungen zwischen jedem vorher bewerteten stringpaerchen aus
 # INPUT: str1(), str2()
@@ -102,8 +114,8 @@ def print_alignment(seq1, seq2):
 # Liste zur Kontrolle ob eine Aminosäuresequenz eingegeben wurde
 
 if __name__ == "__main__":
-    seq1 = "ATCG"
-    seq2 = "AGSG"
+    seq1 = "TTCGZU"
+    seq2 = "TCSGSS"
     print_alignment(seq1, seq2)
     seq1 = "ATT"
     seq2 = "ATG"
