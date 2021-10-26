@@ -1,5 +1,9 @@
 # liste wird fuer die bewertung der eingabe verwendet
 QualityList = ["A", "G", "C", "T", "_", " "]
+
+# creates a dictionary for the evaluation of the mutation in two sequences.
+# the
+
 # erstellung eines dictionary zur beurteilung der jeweiligen alignments bzw.
 # ihrer konkatinierten strings der sequenzen an der postion [index]. Die
 # jeweiligen Keys sind die letztendliche bewertung. die values sind listen
@@ -99,7 +103,7 @@ def alignment_eval(seq1, seq2):
 # bewertungen zwischen jedem vorher bewerteten stringpaerchen aus
 # INPUT: str1(), str2()
 # OUTPUT: None
-def print_alignment(seq1, seq2):
+def showAlignment(seq1, seq2):
     evaluation = alignment_eval(seq1, seq2)
     # evaluation = alignment_bewertung(seq1,seq2)
 
@@ -116,7 +120,7 @@ def print_alignment(seq1, seq2):
 if __name__ == "__main__":
     seq1 = "TTCGZU"
     seq2 = "TCSGSS"
-    print_alignment(seq1, seq2)
+    showAlignment(seq1, seq2)
     seq1 = "ATT"
     seq2 = "ATG"
-    print_alignment(seq1, seq2)
+    showAlignment(seq1, seq2)
