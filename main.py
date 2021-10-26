@@ -76,8 +76,8 @@ def alignment_eval(seq1, seq2):
             # print('Pair: ', seq1_seq2_pair)
             # print('QualityValue: ', mergedDictionaryValues)
             evaluate_string += "#"
-            wrong_inputs.append('Wrong input. Character combination {} in # '\
-                    'position not allowed'.format(seq1_seq2_pair))
+            wrong_inputs.append('Wrong input at #. Character combination {}'\
+                                ' is not allowed'.format(seq1_seq2_pair))
         else:
             # seq1_seq2_pair is the variable to iterate over in the loop.
             # it uses each concatenatet pair from the concat_list to
@@ -93,7 +93,7 @@ def alignment_eval(seq1, seq2):
                     if seq1_seq2_pair == dict_val:
                         evaluate_string += sorted_dict[index][0]
     for index in wrong_inputs:
-        print([index])
+        print([index][0])
     return evaluate_string
 # diese funktion druckt die einzelnen sequenzen wieder aus und fuegt die
 # bewertungen zwischen jedem vorher bewerteten stringpaerchen aus
