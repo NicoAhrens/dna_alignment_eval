@@ -81,7 +81,7 @@ def alignmentEval(seq1, seq2):
     # creates tuple of all items in QualityDictionary in reverse order, for
     # the later iteration
 
-    sorted_dict = sorted(QualityDictionary.items(), reverse = True)
+    sorted_dict = sorted(QualityDictionary.items(), reverse=True)
     #print(sorted_dict)
     wrong_inputs = []
     merged_dictionary_values = \
@@ -105,7 +105,8 @@ def alignmentEval(seq1, seq2):
             ###print('Pair: ', seq1_seq2_pair)
             ####print('QualityValue: ', merged_dictionary_values)
             evaluate_string += '#'
-            wrong_inputs.append('Character combination {}is not allowed. '\
+            wrong_inputs.append('Character combination {} in the following sequence alignment'\
+                                ' is not allowed. '\
                                 'Printed out "#" as placeholder.'\
                                 .format(seq1_seq2_pair))
         else:
@@ -127,6 +128,7 @@ def alignmentEval(seq1, seq2):
         print([index][0])
 
     return evaluate_string
+
 # This function prints out each dna sequence and in between it prints out
 # the match evaluation. If the sequences do not have the same length it prints
 # out this information for the user.
@@ -135,11 +137,11 @@ def alignmentEval(seq1, seq2):
 def showAlignment(seq1, seq2):
     evaluation = alignmentEval(seq1, seq2)
     if len(seq1) == len(seq2):
-        print('Alignment Evaluation:')
-        print(len(seq1)* '~')
+        print('\nAlignment Evaluation:')
+        print(len(seq1) * '~')
         print(seq1)
         print(evaluation)
         print(seq2)
         print(len(seq1) * '~')
     else:
-        print('Did not align sequences, because they are not the same length')
+        print('Did not align sequences, because they are not the same length.\n')
