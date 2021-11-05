@@ -143,5 +143,3 @@ def showAlignment(seq1, seq2):
         print(len(seq1) * '~')
     else:
         print('Did not align sequences, because they are not the same length')
-
-if __name__ == '__main__':
