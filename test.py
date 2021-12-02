@@ -24,6 +24,9 @@ main.showAlignment(seq1, seq2)
 seq1 = 'AT T'
 seq2 = 'AT G'
 main.showAlignment(seq1, seq2)
+seq1 = 'AT_T__AGTC'
+seq2 = 'AT_G_AATGC'
+main.showAlignment(seq1, seq2)
 seq1 = '___'
 seq2 = '___'
 main.showAlignment(seq1, seq2)
